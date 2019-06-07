@@ -20,7 +20,7 @@ function displayGiphyInfo() {
         //create new image html
         var $card = $('<div>');
         var $actionGif = $("<img>");
-        var $addRating = $('<p>');
+        var $addRating = $('<p>').css("width","100px", "margin-right", "0");
 
         //assign source image element to image source attribute with alt name
         $actionGif.attr("src", animatedURL);
@@ -36,21 +36,21 @@ function displayGiphyInfo() {
         //run new image html prepended to #images div
         $(".giphy-dump").prepend($card);
 
-        $(".giphy-dump img").on("click", function() {
-            let state = $(this).attr('data-state');
-            console.log(state);
-            if(state === "still") {
-                $(this).attr('src', $(this).attr('data-animate'));
-                $(this).attr('data-state', 'animate');
-                console.log("still: ")
-            }else{
-                $(this).attr('src', $(this).attr('data-still'));
-                $(this).attr('data-state', 'still');
-                console.log("animate: ")
-            }
-        })
     })
 }
+$(".giphy-dump").on("click", "img", function() {
+    let state = $(this).attr('data-state');
+    console.log(state);
+    if(state === "still") {
+        $(this).attr('src', $(this).attr('data-animate'));
+        $(this).attr('data-state', 'animate');
+        console.log("still: ")
+    }else{
+        $(this).attr('src', $(this).attr('data-still'));
+        $(this).attr('data-state', 'still');
+        console.log("animate: ")
+    }
+})
 // List for all actions to be started with and added on to.
 var actions = ["Jump", "Hike", "Run", "Zap", "Rock Out", "Party"];
 
