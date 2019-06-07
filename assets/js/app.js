@@ -18,9 +18,9 @@ function displayGiphyInfo() {
         console.log(rating);
         console.log(response);
         //create new image html
-        var $card = $('<div>')
+        var $card = $('<div>');
         var $actionGif = $("<img>");
-        let $addRating = $('<p>')
+        var $addRating = $('<p>');
 
         //assign source image element to image source attribute with alt name
         $actionGif.attr("src", animatedURL);
@@ -29,12 +29,12 @@ function displayGiphyInfo() {
         $actionGif.attr("data-state", "animate");
         $actionGif.attr("alt", search + " action image");
         $addRating.text(`Rating: ${rating}`);
-        $card.append($actionGif)
-        $actionGif.append($addRating);
-        $actionGif.addClass('pr-2 pb-2');
+        $card.append($actionGif); 
+        $card.append($addRating);
+        $card.addClass('pr-2 pb-2');
 
         //run new image html prepended to #images div
-        $(".giphy-dump").prepend($actionGif);
+        $(".giphy-dump").prepend($card);
 
         $(".giphy-dump img").on("click", function() {
             let state = $(this).attr('data-state');
