@@ -10,32 +10,41 @@ function displayGiphyInfo() {
         url: searchURL,
         method: "GET"
     }).then(function(response) {
-        var index = Math.floor(Math.random()*25);
-        console.log(index);
-        var animatedURL = response.data[index].images.fixed_height.url;
-        var stillURL = response.data[index].images.fixed_height_still.url;
-        var rating = response.data[index].rating;
-        console.log(rating);
-        console.log(response);
-        //create new image html
-        var $card = $('<div>');
-        var $actionGif = $("<img>");
-        var $addRating = $('<p>').css("width","100px", "margin-right", "0");
+        
 
-        //assign source image element to image source attribute with alt name
-        $actionGif.attr("src", animatedURL);
-        $actionGif.attr("data-still", stillURL);
-        $actionGif.attr("data-animate", animatedURL);
-        $actionGif.attr("data-state", "animate");
-        $actionGif.attr("alt", search + " action image");
-        $addRating.text(`Rating: ${rating}`);
-        $card.append($actionGif); 
-        $card.append($addRating);
-        $card.addClass('pr-2 pb-2');
+        var arr = []
+        while(arr.length < 10){
+            var r = Math.floor(Math.random()*25);
+            if(arr.indexOf(r) === -1) arr.push(r);
+        }
 
-        //run new image html prepended to #images div
-        $(".giphy-dump").prepend($card);
+        arr.forEach((index) => {
 
+            var animatedURL = response.data[index].images.fixed_height.url;
+            var stillURL = response.data[index].images.fixed_height_still.url;
+            var rating = response.data[index].rating;
+            console.log(rating);
+            console.log(response);
+            //create new image html
+            var $card = $('<div>');
+            var $actionGif = $("<img>");
+            var $addRating = $('<p>').css("width","100px", "margin-right", "0");
+            
+            //assign source image element to image source attribute with alt name
+            $actionGif.attr("src", animatedURL);
+            $actionGif.attr("data-still", stillURL);
+            $actionGif.attr("data-animate", animatedURL);
+            $actionGif.attr("data-state", "animate");
+            $actionGif.attr("alt", search + " action image");
+            $addRating.text(`Rating: ${rating}`);
+            $card.append($actionGif); 
+            $card.append($addRating);
+            $card.addClass('pr-2 pb-2');
+            
+            //run new image html prepended to #images div
+            $(".giphy-dump").prepend($card);
+            
+        })
     })
 }
 $(".giphy-dump").on("click", "img", function() {
